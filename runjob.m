@@ -1,7 +1,7 @@
 
-%data_MICA = '/wynton/home/rajlab/fabdelnour/data/fMRI_DK';
+data_MICA = '/wynton/home/rajlab/fabdelnour/data/fMRI_DK';
 
-data_MICA = '../../Data/fMRI_MICA'; % Data location
+%data_MICA = '../../Data/fMRI_MICA'; % Data location
 
 parpool(4);
 
