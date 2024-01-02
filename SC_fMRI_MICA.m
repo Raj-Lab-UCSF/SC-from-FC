@@ -18,6 +18,9 @@ function [outw, empiricalSC, x0_out, err, err2] = SC_fMRI_MICA(subj , dataFldr )
 
 %dataFldr = '../../Data/fMRI_MICA'; % Data location
 
+numSubj = 50;
+numNodes = 84;
+
 S = load([dataFldr filesep 'MICA_aparc_struct.mat'] , "MICA" );
 S = S.MICA;
 
@@ -31,8 +34,8 @@ flagsin.fnctn = 'fminunc';
 %meanSC = tt/size(S,2);
 %clear tt;
 
-tt = zeros(84,84,50);
-for ii=1:50
+tt = zeros(numNodes,numNodes,numSubj);
+for ii=1:numSubj
     tt(:,:,ii) = S(ii).SC;
 end
 
@@ -51,28 +54,28 @@ empiricalSC = x0_out;
 err = Inf;
 err2 = 0;
 % 
-% if ( nargin == 1 ) % Process all subjects
-%     err = zeros(numNodes,size(S,2));
-%     err2 = err;
-% 
-%     for subj=1:size(S,2)
-%         mtxFC = S(subj).fMRI_TS;
-%         %mtxFC = mtxFC';
-%         SC = S(subj).SC;
-%         FC = S(subj).FC;
-%         [outw(:,:,subj) , ~, empiricalSC(:,:,subj), x0_out(:,:,subj) , err(:,subj), err2(:,subj)] = structFromFunc_MICA( FC , mtxFC , meanSC , stdSC , SC  , subj, flagsin );
-%     end
-% 
-% elseif (nargin == 2) % Process only subject subj
-%     %err = zeros(numNodes,1);
-% 
-%     mtxFC = S(subj).fMRI_TS;
-%     %mtxFC = mtxFC';
-%     SC = S(subj).SC;
-%     FC = S(subj).FC;
-%     [outw , ~, empiricalSC, x0_out , err, err2 ] = structFromFunc_MICA( FC , mtxFC , meanSC , stdSC, SC  , subj, flagsin );
-% 
-% end
+if ( nargin == 1 ) % Process all subjects
+    err = zeros(numNodes,size(S,2));
+    err2 = err;
+
+    for subj=1:size(S,2)
+        mtxFC = S(subj).fMRI_TS;
+        %mtxFC = mtxFC';
+        SC = S(subj).SC;
+        FC = S(subj).FC;
+        [outw(:,:,subj) , ~, empiricalSC(:,:,subj), x0_out(:,:,subj) , err(:,subj), err2(:,subj)] = structFromFunc_MICA( FC , mtxFC , meanSC , stdSC , SC  , subj, flagsin );
+    end
+
+elseif (nargin == 2) % Process only subject subj
+    %err = zeros(numNodes,1);
+
+    mtxFC = S(subj).fMRI_TS;
+    %mtxFC = mtxFC';
+    SC = S(subj).SC;
+    FC = S(subj).FC;
+    [outw , ~, empiricalSC, x0_out , err, err2 ] = structFromFunc_MICA( FC , mtxFC , meanSC , stdSC, SC  , subj, flagsin );
+
+end
 
 
 

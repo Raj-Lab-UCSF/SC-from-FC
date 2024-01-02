@@ -30,7 +30,7 @@ function [outw , meanSC, empiricalSC, x0_out , minErr, err2] = structFromFunc_MI
 %
 
 
-if ( nargin == 5)
+if ( nargin == 6)
     flagsin.fnctn = 'fminunc';
 end
 
@@ -148,7 +148,7 @@ tEnd = toc(tStart);
         % default algorithm: Algorithm','trust-region-reflective')
         % Other algorithms: 'interior-point', 'levenberg-marquardt'
 
-        %% Comptue estimation error between true SC and estimated SC, w
+        %% Compute estimation error between true SC and estimated SC, w
         % SC: true SC, w: estimated subject SC
         err(jj) = norm( w/norm(w) - SC/norm(SC) ); 
 
@@ -344,7 +344,7 @@ figure;
     title('Mean SC, log', 'FontSize',ftsize);
 
     figname = ['SC_from_TS_log_'  num2str(subj)]; % '_' num2str(kk)];
-    saveas(gcf , [saveFigs filesep figname '_log';] , 'jpg');
+    saveas(gcf , [saveFigs filesep figname] , 'jpg');
 
 
 end
