@@ -189,10 +189,10 @@ tEnd = toc(tStart);
     %kk = kk+1;
     %disp(['kk = ' num2str(kk)])
 %end
- figure; 
- plot(err);
- title(['Estimation err, subj ' num2str(subj)] , 'FontSize', 18);
- saveas(gcf , [saveFigs filesep 'error_subj_' num2str(subj)] , 'jpg');
+ %figure; 
+ %plot(err);
+ %title(['Estimation err, subj ' num2str(subj)] , 'FontSize', 18);
+ %saveas(gcf , [saveFigs filesep 'error_subj_' num2str(subj)] , 'jpg');
  %clf;
 
 empiricalSC = squareform(SC);

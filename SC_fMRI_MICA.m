@@ -51,8 +51,8 @@ x0_out = zeros(numNodes,numNodes,size(S,2));
 outw = x0_out;
 empiricalSC = x0_out;
 
-err = Inf;
-err2 = 0;
+%err = Inf;
+%err2 = 0;
 % 
 if ( nargin == 1 ) % Process all subjects
     err = zeros(numNodes,size(S,2));
