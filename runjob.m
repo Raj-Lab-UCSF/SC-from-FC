@@ -25,4 +25,4 @@ delete( gcp('nocreate') );
 
 %save('results_struct.mat' , 'results_struct');
 
-save([data_MICA filesep 'results_struct.mat'] , 'results_struct' );
+save('results_struct.mat' , 'results_struct' );
