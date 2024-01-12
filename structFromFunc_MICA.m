@@ -167,13 +167,13 @@ tEnd = toc(tStart);
 
     %end
     
-    fig = gcf;
-    figname = ['fmincon_itr' '_' num2str(subj) '_' num2str(jj)];
-    saveas(gcf , [saveFigs filesep figname] , 'jpg');
+    %fig = gcf;
+    %figname = ['fmincon_itr' '_' num2str(subj) '_' num2str(jj)];
+    %saveas(gcf , [saveFigs filesep figname] , 'jpg');
     
     %% Generate figure
-    genfig(outw,squareform(SC),x0_out,meanSC,subj, minErr, lambda, saveFigs);
-    deltafig(outw,squareform(SC),meanSC,stdSC,subj,minErr, lambda, saveFigs);
+    %genfig(outw,squareform(SC),x0_out,meanSC,subj, minErr, lambda, saveFigs);
+    %deltafig(outw,squareform(SC),meanSC,stdSC,subj,minErr, lambda, saveFigs);
 
     %% Perform parameter udpate here
     %figure; imagesc(updateSC - squareform(w)); colorbar;
