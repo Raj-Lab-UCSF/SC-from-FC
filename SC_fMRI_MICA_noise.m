@@ -1,5 +1,4 @@
-function [outw, empiricalSC, x0_out, err, err2] = SC_fMRI_MICA_noise
-(subj , dataFldr , sparcity)
+function [outw, empiricalSC, x0_out, err, err2] = SC_fMRI_MICA_noise(subj , dataFldr , sparcity)
 
 % This function opens MICA data mat file, extracts fMRI time series, SC,
 % and FC for each subject and runs fitSGM for each subject.
@@ -44,7 +43,7 @@ meanSC = mean(tt,3);
 stdSC = std(tt , 0, 3);
 %zerosSC = (stdSC );
 
-noise = 1000 * abs(randn(numNodes));
+noise = 500 * abs(randn(numNodes));
 
 % Sparcify noise
 Index = randperm(numel(noise), ceil(numel(noise) * sparcity));
