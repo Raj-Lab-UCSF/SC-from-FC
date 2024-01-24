@@ -28,4 +28,4 @@ end
 
 delete( gcp('nocreate') );
 
-save('results_struct_noise_3.mat' , 'results_struct_noise_3' );
+save('results_struct_noise_3.mat' , 'results_struct_noise' );
