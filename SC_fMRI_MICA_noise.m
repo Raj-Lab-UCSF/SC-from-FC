@@ -27,19 +27,17 @@ S = S.MICA;
 flagsin.fnctn = 'fminunc';
 
 %% Find mean SC
-%tt = zeros(size(S(1).SC));
-%for ii = 1:size(S,2)
-%    tt = tt + S(ii).SC;
+
+%tt = zeros(numNodes,numNodes,numSubj);
+%for ii=1:numSubj
+%    tt(:,:,ii) = S(ii).SC;
 %end
-%meanSC = tt/size(S,2);
-%clear tt;
 
-tt = zeros(numNodes,numNodes,numSubj);
-for ii=1:numSubj
-    tt(:,:,ii) = S(ii).SC;
-end
+meanSC = load("/wynton/home/rajlab/fabdelnour/data/fMRI_DK/mean_mica.mat");
 
-meanSC = mean(tt,3);
+meanSC = meanSC.mean_mica;
+
+%meanSC = mean(tt,3);
 stdSC = std(tt , 0, 3);
 %zerosSC = (stdSC );
 
