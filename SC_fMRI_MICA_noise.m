@@ -56,7 +56,7 @@ spNoise = B;
 
 clear tt B Index ;
 
-tt = mean() meanSC , "all");
+tt = mean( meanSC , "all" );
 meanSC = ( meanSC + spNoise ) / tt;
 stdSC = stdSC / tt;
 
