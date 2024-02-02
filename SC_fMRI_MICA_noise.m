@@ -13,6 +13,8 @@ function [outw, empiricalSC, noisySC, x0_out, err, err2] = SC_fMRI_MICA_noise(su
 % x0_out: 84x84x50 array of subjects' fmincon initial guess
 % err: estimation error between true SC and estimated SC
 % err2: Error, mean SC vs subject true SC
+%
+% SC is normalized to sum/sum
 
 %dataFldr = '/wynton/home/rajlab/fabdelnour/data/fMRI_DK';
 
@@ -30,15 +32,17 @@ flagsin.fnctn = 'fminunc';
 
 %tt = zeros(numNodes,numNodes,numSubj);
 %for ii=1:numSubj
-%    tt(:,:,ii) = S(ii).SC;
+%   tt(:,:,ii) = S(ii).SC;
 %end
 
-meanSC = load("/wynton/home/rajlab/fabdelnour/data/fMRI_DK/mean_mica.mat");
+meanSC = load("/wynton/home/rajlab/fabdelnour/data/fMRI_DK/mean_TFC.mat");
 
-meanSC = meanSC.mean_mica;
+meanSC = meanSC.mean_TFC;
+stdSC = meanSC.std_TFC;
 
 %meanSC = mean(tt,3);
-stdSC = std(tt , 0, 3);
+%stdSC = std(tt , 0, 3);
+
 %zerosSC = (stdSC );
 
 noise = 500 * abs(randn(numNodes));
@@ -52,7 +56,9 @@ spNoise = B;
 
 clear tt B Index ;
 
-meanSC = meanSC + spNoise;
+meanSC = ( meanSC + spNoise ) / mean( meanSC , "all");
+stdSC = stdSC / mean( meanSC , "all" );
+
 noisySC = meanSC;
 
 numNodes = size(S(1).SC,1);
@@ -71,7 +77,7 @@ if ( nargin == 2 ) % Process all subjects
     for subj=1:size(S,2)
         mtxFC = S(subj).fMRI_TS;
         %mtxFC = mtxFC';
-        SC = S(subj).SC;
+        SC = S(subj).SC / sum( S(subj).SC , "all");
         FC = S(subj).FC;
         [outw(:,:,subj) , ~, empiricalSC(:,:,subj), x0_out(:,:,subj) , err(:,subj), err2(:,subj)] = structFromFunc_MICA( FC , mtxFC , meanSC , stdSC , SC  , subj, flagsin );
     end
@@ -81,7 +87,7 @@ elseif (nargin == 3) % Process only subject subj
 
     mtxFC = S(subj).fMRI_TS;
     %mtxFC = mtxFC';
-    SC = S(subj).SC;
+    SC = S(subj).SC / sum( S(subj).SC , "all");
     FC = S(subj).FC;
     [outw , ~, empiricalSC, x0_out , err, err2 ] = structFromFunc_MICA( FC , mtxFC , meanSC , stdSC, SC  , subj, flagsin );
 
