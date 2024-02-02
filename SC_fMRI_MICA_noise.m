@@ -35,15 +35,16 @@ flagsin.fnctn = 'fminunc';
 %   tt(:,:,ii) = S(ii).SC;
 %end
 
-meanSC = load("/wynton/home/rajlab/fabdelnour/data/fMRI_DK/mean_TFC.mat");
+tt = load("/wynton/home/rajlab/fabdelnour/data/fMRI_DK/mean_TFC.mat");
 
-meanSC = meanSC.mean_TFC;
-stdSC = meanSC.std_TFC;
+meanSC = tt.mean_TFC;
+stdSC = tt.std_TFC;
 
 %meanSC = mean(tt,3);
 %stdSC = std(tt , 0, 3);
 
 %zerosSC = (stdSC );
+clear tt
 
 noise = 500 * abs(randn(numNodes));
 
