@@ -4,7 +4,7 @@ data_MICA = '/wynton/home/rajlab/fabdelnour/data/fMRI_DK';
 %data_MICA = '../../Data/fMRI_MICA'; % Data location
 
 numSubj = 50;
-workers_num = 32;  
+workers_num = 24;  
 parpool(workers_num);
 
 results_struct_noise = struct;

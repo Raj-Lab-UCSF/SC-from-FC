@@ -8,7 +8,7 @@
 #### Error file
 #$ -e /wynton/home/rajlab/fabdelnour/jobs/SC_from_fitSGM/JobOutput/$JOB_NAME_$JOB_ID.out
 #### number of cores
-#$ -pe smp 32
+#$ -pe smp 24
 #### memory per core
 #$ -l mem_free=2G
 #### Maximum run time
